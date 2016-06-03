@@ -38,7 +38,7 @@ public class EmailProcess {
         }
 
     }
-    public static class ReducingTask extends Reducer<Text,IntWritable,Text,Text> {
+    public static class ReducingTask extends Reducer<Text,Text,Text,Text> {
         private Text result = new Text();
         private Text k = new Text();
         public void reduce(Text key, Iterable<Text> values,
