@@ -31,7 +31,7 @@ public class EmailProcess {
                 v.set(tokens[1]+"^p");
             }else if(tableName.equals("e.csv")){
                 //5th
-                k.set(tokens[5]);
+                k.set(tokens[0]);
                 v.set(tokens[11]+"^e");
             }
             context.write(k,v);
