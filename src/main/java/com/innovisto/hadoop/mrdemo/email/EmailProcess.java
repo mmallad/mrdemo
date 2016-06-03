@@ -47,11 +47,12 @@ public class EmailProcess {
             String v = "";
             for (Text val : values) {
                 String[] s = val.toString().split("^");
-                if(s.length < 1) continue;
-                if(s[1].equals("p")){
-                    k.set(s[0]);
-                }else{
-                    v += s[0]+", ";
+                if(s.length >= 1) {
+                    if (s[1].equals("p")) {
+                        k.set(s[0]);
+                    } else {
+                        v += s[0] + ", ";
+                    }
                 }
             }
             result.set(v);
