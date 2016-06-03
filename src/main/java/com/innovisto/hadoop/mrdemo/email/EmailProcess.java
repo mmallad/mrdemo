@@ -48,7 +48,7 @@ public class EmailProcess {
             for (Text val : values) {
                 String[] s = val.toString().split("^");
                 System.out.println("Length : "+s.length);
-                if(s.length == 1) {
+                if(s.length == 2) {
                     String f = s[1];
                     if (f.equals("p")) {
                         k.set(s[0]);
