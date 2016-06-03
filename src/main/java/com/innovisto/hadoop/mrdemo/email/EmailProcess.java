@@ -25,13 +25,14 @@ public class EmailProcess {
             String[] tokens = line.split(",");
             if(tokens.length < 2) return;
             String tableName = ((FileSplit) context.getInputSplit()).getPath().getName();
-            k.set(tokens[0]);
             if(tableName.equals("p.csv")){
                 //1th
+                k.set(tokens[0]);
                 v.set(tokens[1]+"#@$%^p");
             }else if(tableName.equals("e.csv")){
                 //5th
-                v.set(tokens[5]+"#@$%^e");
+                k.set(tokens[5]);
+                v.set(tokens[11]+"#@$%^e");
             }
             context.write(k,v);
         }
@@ -47,9 +48,9 @@ public class EmailProcess {
             for (Text val : values) {
                 String[] s = v.split("#@$%^e");
                 if(s[1].equals("p")){
-                    k.set(s[1]);
+                    k.set(s[0]);
                 }else{
-                    v += val.toString()+", ";
+                    v += s[0]+", ";
                 }
             }
             //result.set(sum);
