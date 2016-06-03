@@ -42,12 +42,13 @@ public class EmailProcess {
         private Text result = new Text();
         private Text k = new Text();
         String tempKey = "";
+        StringBuilder v = new StringBuilder();
         public void reduce(Text key, Iterable<Text> values,
                            Context context
         ) throws IOException, InterruptedException {
-            StringBuilder v = new StringBuilder();
             for (Text val : values) {
                 String record = val.toString();
+                String[] records = record.split("^");
                 v.append(record).append(" [{}]");
                 /*String[] records = record.split("^");
                 if(records.length != 2) continue;
