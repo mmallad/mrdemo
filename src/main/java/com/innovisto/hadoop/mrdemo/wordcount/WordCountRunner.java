@@ -29,7 +29,7 @@ public class WordCountRunner extends Configured implements Tool {
         Configuration conf = this.getConf();
 
         // Create job
-        Job job = Job.getInstance(conf, "Email processing job");
+        Job job = Job.getInstance(conf, "Word count job");
         job.setJarByClass(WordCountRunner.class);
 
         // Setup MapReduce job
@@ -56,15 +56,5 @@ public class WordCountRunner extends Configured implements Tool {
 
         // Execute job and return status
         return job.waitForCompletion(true) ? 0 : 1;
-    }
-
-    @Override
-    public void setConf(Configuration configuration) {
-
-    }
-
-    @Override
-    public Configuration getConf() {
-        return null;
     }
 }
