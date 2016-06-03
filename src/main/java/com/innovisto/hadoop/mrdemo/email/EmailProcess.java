@@ -47,19 +47,18 @@ public class EmailProcess {
             String v = "";
             for (Text val : values) {
                 String[] s = val.toString().split("^");
-                System.out.println("Length : "+s.length);
                 if(s.length == 2) {
                     if (s[1].equals("p")) {
                         k.set(s[0]);
-                    } else {
+                    } else if(s[1].equals("e")){
                         v += s[0] + ", ";
                     }
-                }else{
+                }/*else{
                     k.set(key);
                     result.set(val);
-                }
+                }*/
             }
-           // result.set(v);
+            result.set(v);
             context.write(k, result);
         }
     }
