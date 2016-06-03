@@ -59,7 +59,7 @@ public class EmailProcess {
                     result.set(val);
                 }
             }
-            result.set(v);
+           // result.set(v);
             context.write(k, result);
         }
     }
