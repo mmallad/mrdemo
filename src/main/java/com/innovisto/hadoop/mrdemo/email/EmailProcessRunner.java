@@ -27,6 +27,7 @@ public class EmailProcessRunner extends Configured implements Tool {
     public int run(String[] args) throws Exception {
         // When implementing tool
         Configuration conf = this.getConf();
+        conf.set("textinputformat.record.delimiter","#$%^&*");
 
         // Create job
         Job job = Job.getInstance(conf, "Email processing job");
