@@ -28,11 +28,11 @@ public class EmailProcess {
             if(tableName.equals("p.csv")){
                 //1th
                 k.set(tokens[0]);
-                v.set(tokens[1]+"#@$%^p");
+                v.set(tokens[1]+"^p");
             }else if(tableName.equals("e.csv")){
                 //5th
                 k.set(tokens[5]);
-                v.set(tokens[11]+"#@$%^e");
+                v.set(tokens[11]+"^e");
             }
             context.write(k,v);
         }
@@ -46,7 +46,7 @@ public class EmailProcess {
         ) throws IOException, InterruptedException {
             String v = "";
             for (Text val : values) {
-                String[] s = val.toString().split("#@$%^");
+                String[] s = val.toString().split("^");
                 if(s[1].equals("p")){
                     k.set(s[0]);
                 }else{
