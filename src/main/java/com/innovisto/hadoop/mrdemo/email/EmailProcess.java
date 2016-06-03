@@ -28,9 +28,9 @@ public class EmailProcess {
             if(tableName.equals("p.csv")){
                 //1th
                 v.set(tokens[1]+"#@$%^p");
-            }else{
+            }else if(tableName.equals("e.csv")){
                 //5th
-                v.set(tokens[1]+"#@$%^e");
+                v.set(tokens[5]+"#@$%^e");
             }
             context.write(k,v);
         }
