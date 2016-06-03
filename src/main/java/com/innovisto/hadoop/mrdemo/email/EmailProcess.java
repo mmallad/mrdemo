@@ -46,7 +46,7 @@ public class EmailProcess {
         ) throws IOException, InterruptedException {
             String v = "";
             for (Text val : values) {
-                String[] s = v.split("#@$%^e");
+                String[] s = v.split("#@$%^");
                 if(s[1].equals("p")){
                     k.set(s[0]);
                 }else{
