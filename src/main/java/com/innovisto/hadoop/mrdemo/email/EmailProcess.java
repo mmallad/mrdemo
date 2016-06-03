@@ -4,6 +4,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ public class EmailProcess {
             String line = value.toString();
             String[] tokens = line.split(",");
             k.set(tokens[0]);
-            v.set(context.getWorkingDirectory().getName());
+            v.set(((FileSplit) context.getInputSplit()).getPath().getName());
             context.write(k,v);
         }
 
