@@ -58,9 +58,6 @@ public class EmailProcess {
                         tempKey = records[0]+" => "+recordNexts[0];
                     }
                 }
-                k.set("a");
-                result.set(tempKey);
-                context.write(k, result);
                /* String[] s = val.toString().split("^");
                 if(s.length == 2) {
                     if (s[1].equals("p")) {
@@ -73,6 +70,9 @@ public class EmailProcess {
                 result.set(v);
                 context.write(k, result);*/
             }
+            k.set("a");
+            result.set(tempKey);
+            context.write(k, result);
         }
     }
 }
