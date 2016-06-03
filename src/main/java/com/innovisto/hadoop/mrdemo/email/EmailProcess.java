@@ -23,6 +23,7 @@ public class EmailProcess {
             String line = value.toString();
             //Fifth Position
             String[] tokens = line.split(",");
+            if(tokens.length < 2) return;
             String tableName = ((FileSplit) context.getInputSplit()).getPath().getName();
             k.set(tokens[0]);
             if(tableName.equals("p.csv")){
