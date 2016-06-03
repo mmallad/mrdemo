@@ -36,11 +36,11 @@ public class EmailProcessRunner extends Configured implements Tool {
         // Setup MapReduce job
         // Do not specify the number of Reducer
         job.setMapperClass(EmailProcess.MappingTask.class);
-        job.setReducerClass(EmailProcess.ReducingTask.class);
+        //job.setReducerClass(EmailProcess.ReducingTask.class);
 
         // Specify key / value
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
+        job.setOutputValueClass(Text.class);
 
         // Input
         FileInputFormat.addInputPath(job, new Path(args[0]));
