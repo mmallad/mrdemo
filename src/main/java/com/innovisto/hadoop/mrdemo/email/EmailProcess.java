@@ -49,12 +49,14 @@ public class EmailProcess {
                 String[] s = val.toString().split("^");
                 System.out.println("Length : "+s.length);
                 if(s.length == 2) {
-                    String f = s[1];
-                    if (f.equals("p")) {
+                    if (s[1].equals("p")) {
                         k.set(s[0]);
                     } else {
                         v += s[0] + ", ";
                     }
+                }else{
+                    k.set(key);
+                    result.set(val);
                 }
             }
             result.set(v);
