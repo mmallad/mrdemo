@@ -54,7 +54,7 @@ public class EmailProcess {
                     String recordNext = valNext.toString();
                     String[] recordNexts = recordNext.split("^");
                     if(recordNexts.length != 2) continue;
-                    if(!records[1].equals(recordNexts[1])){
+                    if(records[1].equals(recordNexts[1])){
                         tempKey = records[0]+" => "+recordNexts[0];
                     }
                 }
