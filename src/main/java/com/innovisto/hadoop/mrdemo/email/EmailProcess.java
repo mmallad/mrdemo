@@ -41,14 +41,15 @@ public class EmailProcess {
     public static class ReducingTask extends Reducer<Text,Text,Text,Text> {
         private Text result = new Text();
         private Text k = new Text();
-        StringBuilder v = new StringBuilder();
         String tempKey = "";
         public void reduce(Text key, Iterable<Text> values,
                            Context context
         ) throws IOException, InterruptedException {
+            StringBuilder v = new StringBuilder();
             for (Text val : values) {
                 String record = val.toString();
-                String[] records = record.split("^");
+                v.append(record).append(" [{}]");
+                /*String[] records = record.split("^");
                 if(records.length != 2) continue;
                 else{
                     tempKey ="hawa";
@@ -61,12 +62,12 @@ public class EmailProcess {
                 }else{
                     tempKey = records[0];
                     v.append(records[1]).append(" /");
-                }
+                }*/
 
             }
-            k.set(tempKey);
+            //k.set();
             result.set(v.toString());
-            context.write(k, result);
+            context.write(key, result);
         }
     }
 }
