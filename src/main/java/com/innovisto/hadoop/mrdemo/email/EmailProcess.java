@@ -44,34 +44,21 @@ public class EmailProcess {
         public void reduce(Text key, Iterable<Text> values,
                            Context context
         ) throws IOException, InterruptedException {
-            String v = "";
+            StringBuilder v = new StringBuilder();
             String tempKey = "";
             for (Text val : values) {
                 String record = val.toString();
                 String[] records = record.split("^");
                 if(records.length != 2) continue;
-                for(Text valNext : values){
-                    String recordNext = valNext.toString();
-                    String[] recordNexts = recordNext.split("^");
-                    if(recordNexts.length != 2) continue;
-                    if(records[1].equals(recordNexts[1])){
-                        tempKey = records[0]+" => "+recordNexts[0];
-                    }
+                if(records[1].equals("p")){
+                    tempKey = records[0];
+                }else{
+                    v.append(records[0]).append(" ,");
                 }
-               /* String[] s = val.toString().split("^");
-                if(s.length == 2) {
-                    if (s[1].equals("p")) {
-                        tempKey = s[0];
-                    } else if(s[1].equals("e")){
-                        v += s[0] + ", ";
-                    }
-                }
-                k.set(tempKey);
-                result.set(v);
-                context.write(k, result);*/
+
             }
-            k.set("a");
-            result.set(tempKey);
+            k.set(tempKey);
+            result.set(v.toString());
             context.write(k, result);
         }
     }
