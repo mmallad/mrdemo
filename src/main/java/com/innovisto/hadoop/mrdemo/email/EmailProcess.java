@@ -41,11 +41,11 @@ public class EmailProcess {
     public static class ReducingTask extends Reducer<Text,Text,Text,Text> {
         private Text result = new Text();
         private Text k = new Text();
+        StringBuilder v = new StringBuilder();
+        String tempKey = "";
         public void reduce(Text key, Iterable<Text> values,
                            Context context
         ) throws IOException, InterruptedException {
-            StringBuilder v = new StringBuilder();
-            String tempKey = "";
             for (Text val : values) {
                 String record = val.toString();
                 String[] records = record.split("^");
