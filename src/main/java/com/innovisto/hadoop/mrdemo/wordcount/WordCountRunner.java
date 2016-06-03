@@ -1,9 +1,10 @@
-package com.innovisto.hadoop.mrdemo.email;
+package com.innovisto.hadoop.mrdemo.wordcount;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -15,12 +16,11 @@ import org.apache.hadoop.util.ToolRunner;
 
 /**
  * Created by Dipak Malla
- * Date: 6/3/16
+ * Date: 6/4/16
  */
-public class EmailProcessRunner extends Configured implements Tool {
-
+public class WordCountRunner extends Configured implements Tool {
     public static void main(String[] args) throws Exception {
-        int res = ToolRunner.run(new Configuration(), new EmailProcessRunner(), args);
+        int res = ToolRunner.run(new Configuration(), new WordCountRunner(), args);
         System.exit(res);
     }
     @Override
@@ -30,16 +30,16 @@ public class EmailProcessRunner extends Configured implements Tool {
 
         // Create job
         Job job = Job.getInstance(conf, "Email processing job");
-        job.setJarByClass(EmailProcessRunner.class);
+        job.setJarByClass(WordCountRunner.class);
 
         // Setup MapReduce job
         // Do not specify the number of Reducer
-        job.setMapperClass(EmailProcess.MappingTask.class);
-        //job.setReducerClass(EmailProcess.ReducingTask.class);
+        job.setMapperClass(WordCount.MappingTask.class);
+        job.setReducerClass(WordCount.ReducingTask.class);
 
         // Specify key / value
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
 
         // Input
         FileInputFormat.addInputPath(job, new Path(args[0]));
@@ -56,5 +56,15 @@ public class EmailProcessRunner extends Configured implements Tool {
 
         // Execute job and return status
         return job.waitForCompletion(true) ? 0 : 1;
+    }
+
+    @Override
+    public void setConf(Configuration configuration) {
+
+    }
+
+    @Override
+    public Configuration getConf() {
+        return null;
     }
 }
