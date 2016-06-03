@@ -50,6 +50,10 @@ public class EmailProcess {
                 String record = val.toString();
                 String[] records = record.split("^");
                 if(records.length != 2) continue;
+                else{
+                    tempKey ="hawa";
+                    v.append("tawa").append(" ,");
+                }
                 if(records[1].equals("p")){
                     tempKey = "dipak";
                 }else if(records[1].equals("e")){
