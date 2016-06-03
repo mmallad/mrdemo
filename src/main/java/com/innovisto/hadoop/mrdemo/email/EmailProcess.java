@@ -46,14 +46,14 @@ public class EmailProcess {
         ) throws IOException, InterruptedException {
             String v = "";
             for (Text val : values) {
-                String[] s = v.split("#@$%^");
+                String[] s = val.toString().split("#@$%^");
                 if(s[1].equals("p")){
                     k.set(s[0]);
                 }else{
                     v += s[0]+", ";
                 }
             }
-            //result.set(sum);
+            result.set(v);
             context.write(k, result);
         }
     }
