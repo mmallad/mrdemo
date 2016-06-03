@@ -21,24 +21,38 @@ public class EmailProcess {
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
             String line = value.toString();
+            //Fifth Position
             String[] tokens = line.split(",");
+            String tableName = ((FileSplit) context.getInputSplit()).getPath().getName();
             k.set(tokens[0]);
-            v.set(((FileSplit) context.getInputSplit()).getPath().getName());
+            if(tableName.equals("p.csv")){
+                //1th
+                v.set(tokens[1]+"#@$%^p");
+            }else{
+                //5th
+                v.set(tokens[1]+"#@$%^e");
+            }
             context.write(k,v);
         }
 
     }
-    public static class ReducingTask extends Reducer<Text,IntWritable,Text,IntWritable> {
-        private IntWritable result = new IntWritable();
-        public void reduce(Text key, Iterable<IntWritable> values,
+    public static class ReducingTask extends Reducer<Text,IntWritable,Text,Text> {
+        private Text result = new Text();
+        private Text k = new Text();
+        public void reduce(Text key, Iterable<Text> values,
                            Context context
         ) throws IOException, InterruptedException {
-            int sum = 0;
-            for (IntWritable val : values) {
-                sum += val.get();
+            String v = "";
+            for (Text val : values) {
+                String[] s = v.split("#@$%^e");
+                if(s[1].equals("p")){
+                    k.set(s[1]);
+                }else{
+                    v += val.toString()+", ";
+                }
             }
-            result.set(sum);
-            context.write(key, result);
+            //result.set(sum);
+            context.write(k, result);
         }
     }
 }
