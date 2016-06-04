@@ -46,29 +46,22 @@ public class EmailProcess {
         public void reduce(Text key, Iterable<Text> values,
                            Context context
         ) throws IOException, InterruptedException {
+            int i= 0;
             for (Text val : values) {
+                i++;
                 String record = val.toString();
                 String[] records = record.split("^");
-                v.append(record).append(" [{}]");
-                /*String[] records = record.split("^");
                 if(records.length != 2) continue;
-                else{
-                    tempKey ="hawa";
-                    v.append("tawa").append(" ,");
-                }
                 if(records[1].equals("p")){
-                    tempKey = "dipak";
-                }else if(records[1].equals("e")){
-                    v.append("malla").append(" ,");
-                }else{
+                    //Person Table
                     tempKey = records[0];
-                    v.append(records[1]).append(" /");
-                }*/
-
+                }else{
+                    //Email Table
+                    v.append(records[0]).append("=>");g
+                }
             }
-            //k.set();
-            result.set(v.toString());
-            context.write(key, result);
+            k.set(tempKey);
+            context.write(k, result);
         }
     }
 }
