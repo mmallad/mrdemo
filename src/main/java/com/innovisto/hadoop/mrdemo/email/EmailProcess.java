@@ -39,14 +39,14 @@ public class EmailProcess {
 
     }
     public static class ReducingTask extends Reducer<Text,Text,Text,Text> {
-        private Text result = new Text();
-        private Text k = new Text();
-        String tempKey = "";
-        StringBuilder v = new StringBuilder();
         public void reduce(Text key, Iterable<Text> values,
                            Context context
         ) throws IOException, InterruptedException {
             int i= 0;
+             Text result = new Text();
+             Text k = new Text();
+            String tempKey = "";
+            StringBuilder v = new StringBuilder();
             for (Text val : values) {
                 i++;
                 String record = val.toString();
