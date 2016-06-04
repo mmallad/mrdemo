@@ -57,7 +57,7 @@ public class EmailProcess {
                     tempKey = records[0];
                 }else{
                     //Email Table
-                    v.append(records[0]).append("=>");g
+                    v.append(records[0]).append("=>");
                 }
             }
             k.set(tempKey);
