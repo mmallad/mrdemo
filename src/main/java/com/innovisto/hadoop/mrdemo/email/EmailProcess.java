@@ -60,8 +60,21 @@ public class EmailProcess {
                     v.append(records[0]).append("=>");
                 }
             }
-            k.set(tempKey);
-            context.write(k, result);
+            if(tempKey != null && tempKey.trim().length() > 0 && v.toString().trim().length() > 0) {
+                k.set(tempKey);
+                result.set(v.toString());
+                context.write(k, result);
+            }
+            if(tempKey == null || tempKey.trim().length() == 0){
+                k.set("Person");
+                result.set(v.toString());
+                context.write(k, result);
+            }
+            if(v.toString().trim().length() == 0){
+                result.set("Email");
+                k.set(tempKey);
+                context.write(k, result);
+            }
         }
     }
 }
