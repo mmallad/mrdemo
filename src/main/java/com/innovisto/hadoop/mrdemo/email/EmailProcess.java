@@ -49,9 +49,6 @@ public class EmailProcess {
                 //valueList.add(record);
                 //context.setStatus(key.toString()+" : "+record);
                 String[] records = record.split(",");
-                valueList.add(records[0]);
-                valueList.add(" => ");
-                valueList.add(records[1]);
                 if(records[1].trim().equals("n")){
                     //Person Table
                     keyList.add(records[0]);
@@ -65,11 +62,11 @@ public class EmailProcess {
             StringBuilder builder = new StringBuilder();
             for(String v : valueList){
                 if(v != null){
-                    builder.append(v);
+                    builder.append(v).append(",");
                 }
             }
             vT.set(builder.toString());
-            kT.set("dipak");
+            kT.set(keyList.get(0));
             context.write(kT, vT);
         }
     }
