@@ -23,17 +23,16 @@ public class EmailProcess {
         ) throws IOException, InterruptedException {
             String line = value.toString();
             //Fifth Position
-            String[] tokens = line.split(",");
-            if(tokens.length < 2) return;
+            String[] tokens = line.split("\\t");
             String tableName = ((FileSplit) context.getInputSplit()).getPath().getName();
-            if(tableName.equals("p.csv")){
+            if(tableName.equals("name.txt")){
                 //1th
                 k.set(tokens[0]);
-                v.set(tokens[1]+"^p");
-            }else if(tableName.equals("e.csv")){
+                v.set(tokens[1]+"^n");
+            }else {
                 //5th
                 k.set(tokens[0]);
-                v.set(tokens[11]+"^e");
+                v.set(tokens[1]+"^p");
             }
             context.write(k,v);
         }
@@ -47,11 +46,11 @@ public class EmailProcess {
             List<String> valueList = new ArrayList<>();
             for (Text val : values) {
                 String record = val.toString();
-                valueList.add(record);
+                //valueList.add(record);
                 context.setStatus(key.toString()+" : "+record);
                 String[] records = record.split("^");
                 if(records.length != 2) continue;
-                if(records[1].equals("p")){
+                if(records[1].equals("n")){
                     //Person Table
                     keyList.add(records[0]);
                 }else{
@@ -64,7 +63,7 @@ public class EmailProcess {
             StringBuilder builder = new StringBuilder();
             for(String v : valueList){
                 if(v != null){
-                    builder.append(v).append(" => ");
+                    builder.append(v);
                 }
             }
             vT.set(builder.toString());
