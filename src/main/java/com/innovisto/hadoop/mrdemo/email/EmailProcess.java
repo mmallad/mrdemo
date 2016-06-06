@@ -47,6 +47,7 @@ public class EmailProcess {
             List<String> valueList = new ArrayList<>();
             for (Text val : values) {
                 String record = val.toString();
+                valueList.add(record);
                 context.setStatus(key.toString()+" : "+record);
                 String[] records = record.split("^");
                 if(records.length != 2) continue;
@@ -61,7 +62,7 @@ public class EmailProcess {
             Text vT = new Text();
             Text kT = new Text();
             StringBuilder builder = new StringBuilder();
-            for(String v : keyList){
+            for(String v : valueList){
                 if(v != null){
                     builder.append(v).append(" => ");
                 }
