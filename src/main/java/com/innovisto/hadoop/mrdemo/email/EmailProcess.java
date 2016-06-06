@@ -28,11 +28,11 @@ public class EmailProcess {
             if(tableName.equals("name.txt")){
                 //1th
                 k.set(tokens[0]);
-                v.set(tokens[1]+"^n");
+                v.set(tokens[1]+",n");
             }else {
                 //5th
                 k.set(tokens[0]);
-                v.set(tokens[1]+"^p");
+                v.set(tokens[1]+",p");
             }
             context.write(k,v);
         }
@@ -47,8 +47,8 @@ public class EmailProcess {
             for (Text val : values) {
                 String record = val.toString();
                 //valueList.add(record);
-                context.setStatus(key.toString()+" : "+record);
-                String[] records = record.split("^");
+                //context.setStatus(key.toString()+" : "+record);
+                String[] records = record.split(",");
                 valueList.add(records[0]);
                 valueList.add(" => ");
                 valueList.add(records[1]);
