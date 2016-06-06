@@ -46,7 +46,7 @@ public class EmailProcess {
             List<String> valueList = new ArrayList<>();
             for (Text val : values) {
                 String record = val.toString();
-                //valueList.add(record);
+                valueList.add(record);
                 context.setStatus(key.toString()+" : "+record);
                 String[] records = record.split("^");
                 if(records.length != 2) continue;
