@@ -1,6 +1,5 @@
 package com.innovisto.hadoop.mrdemo.email;
 
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -50,6 +49,7 @@ public class EmailProcess {
             for (Text val : values) {
                 i++;
                 String record = val.toString();
+                context.setStatus(key.toString()+" : "+record);
                 String[] records = record.split("^");
                 if(records.length != 2) continue;
                 if(records[1].equals("p")){

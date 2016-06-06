@@ -42,6 +42,7 @@ public class EmailProcessRunner extends Configured implements Tool {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
 
+
         // Input
         FileInputFormat.addInputPath(job, new Path(args[0]));
         job.setInputFormatClass(TextInputFormat.class);
