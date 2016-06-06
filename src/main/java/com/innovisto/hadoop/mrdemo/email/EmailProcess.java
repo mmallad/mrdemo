@@ -6,6 +6,8 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Dipak Malla
@@ -41,40 +43,32 @@ public class EmailProcess {
         public void reduce(Text key, Iterable<Text> values,
                            Context context
         ) throws IOException, InterruptedException {
-            int i= 0;
-             Text result = new Text();
-             Text k = new Text();
-            String tempKey = "";
-            StringBuilder v = new StringBuilder();
+            List<String> keyList = new ArrayList<>();
+            List<String> valueList = new ArrayList<>();
             for (Text val : values) {
-                i++;
                 String record = val.toString();
                 context.setStatus(key.toString()+" : "+record);
                 String[] records = record.split("^");
                 if(records.length != 2) continue;
                 if(records[1].equals("p")){
                     //Person Table
-                    tempKey = records[0];
+                    keyList.add(records[0]);
                 }else{
                     //Email Table
-                    v.append(records[0]).append("=>");
+                    valueList.add(records[0]);
                 }
             }
-            if(tempKey != null && tempKey.trim().length() > 0 && v.toString().trim().length() > 0) {
-                k.set(tempKey);
-                result.set(v.toString());
-                context.write(k, result);
+            Text vT = new Text();
+            Text kT = new Text();
+            StringBuilder builder = new StringBuilder();
+            for(String v : valueList){
+                if(v != null){
+                    builder.append(v).append(" => ");
+                }
             }
-            if(tempKey == null || tempKey.trim().length() == 0){
-                k.set("Person");
-                result.set(v.toString());
-                context.write(k, result);
-            }
-            if(v.toString().trim().length() == 0){
-                result.set("Email");
-                k.set(tempKey);
-                context.write(k, result);
-            }
+            vT.set(builder.toString());
+            kT.set("dipak");
+            context.write(kT, vT);
         }
     }
 }
