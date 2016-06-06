@@ -61,7 +61,7 @@ public class EmailProcess {
             Text vT = new Text();
             Text kT = new Text();
             StringBuilder builder = new StringBuilder();
-            for(String v : valueList){
+            for(String v : keyList){
                 if(v != null){
                     builder.append(v).append(" => ");
                 }
