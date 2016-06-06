@@ -46,11 +46,13 @@ public class EmailProcess {
             List<String> valueList = new ArrayList<>();
             for (Text val : values) {
                 String record = val.toString();
-                valueList.add(record);
+                //valueList.add(record);
                 context.setStatus(key.toString()+" : "+record);
                 String[] records = record.split("^");
-                if(records.length != 2) continue;
-                if(records[1].equals("n")){
+                valueList.add(records[0]);
+                valueList.add(" => ");
+                valueList.add(records[1]);
+                if(records[1].trim().equals("n")){
                     //Person Table
                     keyList.add(records[0]);
                 }else{
